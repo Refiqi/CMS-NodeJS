@@ -1,1 +1,28 @@
 <h1>ALL POSTS</h1>
+
+<table class="table table-bordered table-inverse table-responsive">
+    <thead class="thead-inverse">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Allow Comments</th>
+            <th>Body</th>
+
+        </tr>
+        </thead>
+        <tbody>
+            
+            {{#each posts}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{title}}</td>
+                <td>{{status}}</td>
+                <td>{{allowComments}}</td>
+                <td>{{body}}</td>
+                <td><a href="/admin/posts/edit/{{id}}" class="btn btn-info">Edit</a></td>
+            </tr>
+            {{/each}}
+
+        </tbody>
+</table>

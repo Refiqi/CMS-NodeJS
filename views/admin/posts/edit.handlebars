@@ -1,11 +1,11 @@
-<h1>Create Post</h1>
+<h1>Edit Post</h1>
 
 <form action="/admin/posts/create" method="POST">
 
     <div class="form-group">
 
         <label for="title">Title</label>
-        <input type="text" name="title" id="title" class="form-control" placeholder="Enter Title">
+        <input type="text" name="title" id="title" class="form-control" value="{{post.title}}">
     
     </div>
 
@@ -22,13 +22,13 @@
 
     <div class="form-check">
       <label for="allowComments">Allow Comments
-      <input type="checkbox" name="allowComments" id="allowComments" class="form-check-input" aria-describedby="helpId">
+      <input type="checkbox" name="allowComments" id="allowComments" class="form-check-input"{{#if post.allowComments}} checked="checked"{{/if}}>
       </label>
     </div>
 
     <div class="form-group">
       <label for="body">Body</label>
-      <textarea class="form-control" name="body" id="body" rows="2" cols="5" placeholder="Enter Description"></textarea>
+      <textarea class="form-control" name="body" id="body" rows="2" cols="5">{{post.body}}</textarea>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

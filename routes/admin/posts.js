@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Post = require('../../models/Post');
 
 router.all('/*', (req, res, next) => {
     req.app.locals.layout = 'admin';
@@ -7,12 +8,12 @@ router.all('/*', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-    res.send('TEST');
-    // Post.find({}).then(posts=> {
-    //     res.send(posts).catch(err=> {
-    //         res.send(err);
-    //     });
-    // });
+    
+    Post.find({}).then(posts=> {
+        res.render('admin/posts', {posts: posts});
+    }).catch(err=> {
+        res.send(err);
+    });
 });
 
 router.get('/create', (req, res)=> {
@@ -20,8 +21,39 @@ router.get('/create', (req, res)=> {
 });
 
 router.post('/create', (req, res)=> {
-    res.send('WORK');
+    
+    let allowComments = true;
+        
+        if(req.body.allowComments) {
+            allowComments = true;
+        } else {
+            allowComments = false;
+        }
+
+        const newPost = new Post({
+            title: req.body.title,
+            status: req.body.status,
+            allowComments: allowComments,
+            body: req.body.body
+        });
+
+        newPost.save().then(postSaved=> {
+            res.redirect('/admin/posts');
+            console.log(postSaved);
+        }).catch(err=>{
+            res.send(err);
+        });
+
 });
+
+router.get('/edit/:id', (req, res)=>{
+
+    Post.findOne({_id: req.params.id}).then(post=> {
+        res.render('admin/posts/edit', {post: post});
+    }).catch(err=> {
+        res.send(err);
+    });
+})
 
 
 module.exports = router;
