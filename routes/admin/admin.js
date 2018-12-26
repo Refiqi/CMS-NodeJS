@@ -10,8 +10,7 @@ router.get('/', (req, res)=> {
     res.status(200).render('home/index');
 });
 
-router.get('/dashboard', (req, res) => {
-    res.render('admin/dashboard');
-});
+
+
 
 module.exports = router;
