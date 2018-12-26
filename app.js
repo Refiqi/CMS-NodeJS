@@ -2,19 +2,28 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const exphbs = require('express-handlebars');
+const methodOverride = require('method-override');
 
 // Body Parser
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // Database
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/cms', { useNewUrlParser: true }).then( db=> {
+mongoose.connect('mongodb://localhost:27017/cms', {
+    useNewUrlParser: true
+}).then(db => {
     console.log('MongoDB Connected');
-}).catch(err=>{
+}).catch(err => {
     console.log(err);
 });
+
+// Method Override
+
+app.use(methodOverride('_method'));
 
 // Load Routes
 const main = require('./routes/home/main');
@@ -33,9 +42,19 @@ app.use('/admin/posts/edit', express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // SET Engine
-app.engine('handlebars', exphbs({defaultLayout: 'home'}));
+
+const {
+    select
+} = require('./helpers/handlebars-helpers');
+
+app.engine('handlebars', exphbs({
+    defaultLayout: 'home',
+    helpers: {
+        select: select
+    }
+}));
 app.set('view engine', 'handlebars');
 
-app.listen(4444, (err)=>{
+app.listen(4444, (err) => {
     console.log('Connected at 4444');
-}); 
+});

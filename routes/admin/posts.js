@@ -8,50 +8,92 @@ router.all('/*', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-    
-    Post.find({}).then(posts=> {
-        res.render('admin/posts', {posts: posts});
-    }).catch(err=> {
+
+    Post.find({}).then(posts => {
+        res.render('admin/posts', {
+            posts: posts
+        });
+    }).catch(err => {
         res.send(err);
     });
 });
 
-router.get('/create', (req, res)=> {
+router.get('/create', (req, res) => {
     res.render('admin/posts/create');
 });
 
-router.post('/create', (req, res)=> {
-    
+router.post('/create', (req, res) => {
+
     let allowComments = true;
-        
-        if(req.body.allowComments) {
+
+    if (req.body.allowComments) {
+        allowComments = true;
+    } else {
+        allowComments = false;
+    }
+
+    const newPost = new Post({
+        title: req.body.title,
+        status: req.body.status,
+        allowComments: allowComments,
+        body: req.body.body
+    });
+
+    newPost.save().then(postSaved => {
+        res.redirect('/admin/posts');
+        console.log(postSaved);
+    }).catch(err => {
+        res.send(err);
+    });
+
+});
+
+router.get('/edit/:id', (req, res) => {
+
+    Post.findOne({
+        _id: req.params.id
+    }).then(post => {
+        res.render('admin/posts/edit', {
+            post: post
+        });
+    }).catch(err => {
+        res.send(err);
+    });
+});
+
+router.put('/edit/:id', (req, res) => {
+
+
+    Post.findOne({
+        _id: req.params.id
+    }).then(post => {
+
+
+        if (req.body.allowComments) {
             allowComments = true;
         } else {
             allowComments = false;
         }
 
-        const newPost = new Post({
-            title: req.body.title,
-            status: req.body.status,
-            allowComments: allowComments,
-            body: req.body.body
-        });
+        post.title = req.body.title;
+        post.status = req.body.status;
+        post.allowComments = allowComments;
+        post.body = req.body.body;
 
-        newPost.save().then(postSaved=> {
+        post.save().then(savedPost => {
             res.redirect('/admin/posts');
-            console.log(postSaved);
-        }).catch(err=>{
-            res.send(err);
         });
 
+    }).catch(err => {
+        res.send(err);
+    });
 });
 
-router.get('/edit/:id', (req, res)=>{
-
-    Post.findOne({_id: req.params.id}).then(post=> {
-        res.render('admin/posts/edit', {post: post});
-    }).catch(err=> {
-        res.send(err);
+router.delete('/:id', (req, res) => {
+    Post.findOneAndDelete({
+        _id: req.params.id
+    }).then(post => {
+        res.redirect('/admin/posts');
     });
 })
 
