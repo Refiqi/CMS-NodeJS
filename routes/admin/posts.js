@@ -10,7 +10,7 @@ router.all('/*', (req, res, next) => {
 router.get('/', (req, res) => {
 
     Post.find({}).then(posts => {
-        res.render('admin/posts', {
+        return res.render('admin/posts', {
             posts: posts
         });
     }).catch(err => {
@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/create', (req, res) => {
-    res.render('admin/posts/create');
+    return res.render('admin/posts/create');
 });
 
 router.post('/create', (req, res) => {
@@ -40,8 +40,7 @@ router.post('/create', (req, res) => {
     });
 
     newPost.save().then(postSaved => {
-        res.redirect('/admin/posts');
-        console.log(postSaved);
+        return res.redirect('/admin/posts');
     }).catch(err => {
         res.send(err);
     });
@@ -53,7 +52,7 @@ router.get('/edit/:id', (req, res) => {
     Post.findOne({
         _id: req.params.id
     }).then(post => {
-        res.render('admin/posts/edit', {
+        return res.render('admin/posts/edit', {
             post: post
         });
     }).catch(err => {
@@ -81,7 +80,7 @@ router.put('/edit/:id', (req, res) => {
         post.body = req.body.body;
 
         post.save().then(savedPost => {
-            res.redirect('/admin/posts');
+            return res.redirect('/admin/posts');
         });
 
     }).catch(err => {
@@ -93,7 +92,7 @@ router.delete('/:id', (req, res) => {
     Post.findOneAndDelete({
         _id: req.params.id
     }).then(post => {
-        res.redirect('/admin/posts');
+        return res.redirect('/admin/posts');
     });
 })
 
