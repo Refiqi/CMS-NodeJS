@@ -95,7 +95,7 @@ router.delete('/:id', (req, res) => {
     }).then(post => {
         res.redirect('/admin/posts');
     });
-})
+});
 
 
 module.exports = router;
