@@ -58,6 +58,5 @@ app.set('view engine', 'handlebars');
 const port = process.env.PORT || 5000
 
 app.listen(port, () => {
-    var port1 = server.address().port;
-  console.log("Express is working on port " + port1);
+
 });
