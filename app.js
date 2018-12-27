@@ -55,6 +55,8 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
-app.listen(4444, (err) => {
-    console.log('Connected at 4444');
+const port = process.env.PORT || 5000
+
+app.listen(port, () => {
+    console.log(`Connected at ${port}`);
 });
