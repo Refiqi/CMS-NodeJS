@@ -9,8 +9,8 @@ router.all('/*', (req, res, next) => {
 
 router.get('/', (req, res) => {
 
-    Post.find({}).then(posts => {
-        return res.render('admin/posts', {
+    return Post.find({}).then(posts => {
+        res.render('admin/posts', {
             posts: posts
         });
     }).catch(err => {
