@@ -21,9 +21,12 @@
   "homepage": "https://github.com/Refiqi/CMS-NodeJS#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-fileupload": "^1.0.0",
     "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
     "faker": "^4.1.0",
     "method-override": "^3.0.0",
     "mongoose": "^5.4.0"
