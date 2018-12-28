@@ -1,12 +1,17 @@
 <h1>Create Post</h1>
 
-<form action="/admin/posts/create" method="POST">
+<form action="/admin/posts/create" method="POST" enctype="multipart/form-data">
 
     <div class="form-group">
 
         <label for="title">Title</label>
-        <input type="text" name="title" id="title" class="form-control" placeholder="Enter Title">
+        <input required type="text" name="title" id="title" class="form-control" placeholder="Enter Title">
     
+    </div>
+
+    <div class="form-group">
+      <label for="file">Upload Image</label>
+      <input type="file" name="file" id="file" class="form-control">
     </div>
 
      <div class="form-group">
@@ -22,14 +27,14 @@
 
     <div class="form-check">
       <label for="allowComments" class="form-check-label">
-      <input type="checkbox" name="allowComments" id="allowComments" class="form-check-input" aria-describedby="helpId">
+      <input required type="checkbox" name="allowComments" id="allowComments" class="form-check-input" aria-describedby="helpId">
       Allow Comments
       </label>
     </div>
 
     <div class="form-group">
       <label for="body">Body</label>
-      <textarea class="form-control" name="body" id="body" rows="2" cols="5" placeholder="Enter Description"></textarea>
+      <textarea required class="form-control" name="body" id="body" rows="2" cols="5" placeholder="Enter Description"></textarea>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

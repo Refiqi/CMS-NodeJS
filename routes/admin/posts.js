@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../../models/Post');
+const { isEmpty, uploadDir } = require('../../helpers/uploads-helpers');
+const fs = require('fs');
 
 router.all('/*', (req, res, next) => {
     req.app.locals.layout = 'admin';
@@ -24,6 +26,18 @@ router.get('/create', (req, res) => {
 
 router.post('/create', (req, res) => {
 
+    let filename = 'cat.jpeg';
+
+    if (!isEmpty(req.files)){
+
+        let file = req.files.file;
+        filename = Date.now() + '-' + file.name;
+
+        file.mv('./public/uploads/' + filename, (err)=>{
+            if (err) throw err;
+        });
+    } 
+
     let allowComments = true;
 
     if (req.body.allowComments) {
@@ -36,7 +50,8 @@ router.post('/create', (req, res) => {
         title: req.body.title,
         status: req.body.status,
         allowComments: allowComments,
-        body: req.body.body
+        body: req.body.body,
+        file: filename
     });
 
     newPost.save().then(postSaved => {
@@ -93,7 +108,9 @@ router.delete('/:id', (req, res) => {
     Post.findOneAndDelete({
         _id: req.params.id
     }).then(post => {
-        res.redirect('/admin/posts');
+        fs.unlink(uploadDir + post.file, (err)=>{
+            res.redirect('/admin/posts');
+        });
     });
 });
 

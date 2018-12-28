@@ -8,6 +8,9 @@ const PostSchema = new Schema ({
         trim: true,
         minlength: 6
     },
+    file: {
+        type: String
+    },
     body: {
         type: String,
         required: true,

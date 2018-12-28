@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
+const upload = require('express-fileupload');
 
 // Body Parser
 const bodyParser = require('body-parser');
@@ -12,8 +13,9 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Database
+const { mongoDbUrl } = require('./config/database');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/cms', {
+mongoose.connect(mongoDbUrl, {
     useNewUrlParser: true
 }).then(db => {
     console.log('MongoDB Connected');
@@ -24,6 +26,11 @@ mongoose.connect('mongodb://localhost:27017/cms', {
 // Method Override
 
 app.use(methodOverride('_method'));
+
+
+// File Upload
+
+app.use(upload());
 
 // Load Routes
 const main = require('./routes/home/main');
