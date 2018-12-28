@@ -4,6 +4,8 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const upload = require('express-fileupload');
+const flash = require('connect-flash');
+const session = require('express-session');
 
 // Body Parser
 const bodyParser = require('body-parser');
@@ -32,6 +34,21 @@ app.use(methodOverride('_method'));
 
 app.use(upload());
 
+// Session and Flash
+app.use(session({
+    secret: 'refiqi',
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(flash());
+
+// Creating Local Variables with middleware
+app.use((req, res, next)=>{
+    res.locals.success_message = req.flash('success_message');
+    next();
+});
+
 // Load Routes
 const main = require('./routes/home/main');
 const admin = require('./routes/admin/admin');
@@ -51,13 +68,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // SET Engine
 
 const {
-    select
+    select, generateTime
 } = require('./helpers/handlebars-helpers');
 
 app.engine('handlebars', exphbs({
     defaultLayout: 'home',
     helpers: {
-        select: select
+        select: select,
+        generateTime: generateTime
     }
 }));
 app.set('view engine', 'handlebars');
