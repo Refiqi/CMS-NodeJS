@@ -60,6 +60,7 @@ app.use('/admin', admin);
 app.use('/admin/posts', posts);
 
 // Use Style and JS
+app.use('/post', express.static('public'));
 app.use('/admin', express.static('public'));
 app.use('/admin/posts', express.static('public'));
 app.use('/admin/posts/edit', express.static('public'));
