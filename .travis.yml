@@ -1,0 +1,18 @@
+sudo: false
+language: node_js
+node_js:
+- node
+install: npm install
+script:
+- npm test
+- gulp
+cache:
+  directories:
+  - node_modules
+deploy:
+  provider: heroku
+  api_key:
+    secure: Xf3/Ug5U9UHCBS4UTFuP5ID2BsW7Asbu0zOL8l7vHyqko3TKk2GPu+isxNzlDkGodbUWfeuqe7g7mfZ7Tsa/HxGu5KyHJ1I8wX7JylUfGB5mOSPPWoDsAhz4djky9IDPThkap1KU8kwdxmeuLEWsB0KOk+Kj0TypWiebUhQqXYk6Zv+11V0baDo8Yll7s2HgF42zbzFSOPimXwJ8xx15mnt9aB71W0NZvGxATZqrK/bT5ox6hfJSoITJlFddK4O8pWW+Ffz0TMhgpDtVZ9DZtgfCHrdQPznVCiqDW62wjuh4dX7mh2sNSxETZtvnhANwRleC2KrAZw7m9ZnT8lDE7m1zKzGEkxXzRD8GrRzyzqxsjFHXwAIkVk+0N4tYNbK/6Jn3/+0I4Kj6/B6LrlkHUy1jbkqtf9EH5hgc6qibXIOevDcb30mGgn/aIPUZ2BrEtH42H/KT5VYnJ3c5HJz0fUng8MFfsLqabvf6o4caJNPIyOTpWgrz0GQkTj1e4SU5nLRMNc/ffFsSb8DZsIacSqGbp3W+YIzplcobcyMkCfGV8xi3ufqLYI12eCa7Br0cvGP5Ku/MCaovcCd+OQnR0lPHgCBPQF9Qrx3KlJ7BOOj59nuotNx+fLzppNm3bxbHXjPWqC5Z997DDYND8lw+j0Qlu0pn9B/R+Qu9b3myc5Q=
+  app: refiqi-cms-nodejs
+  on:
+    repo: Refiqi/CMS-NodeJS
