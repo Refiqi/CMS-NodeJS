@@ -14,26 +14,26 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-// Database Remote
-// const { mongoDbUrl } = require('./config/database');
-// const mongoose = require('mongoose');
-// mongoose.connect(mongoDbUrl, {
-//     useNewUrlParser: true
-// }).then(db => {
-//     console.log('MongoDB Connected');
-// }).catch(err => {
-//     console.log(err);
-// });
-
-// Database Localhost
+// Database Remote mLab
+const { mongoDbUrl } = require('./config/database');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/cms', {
+mongoose.connect(mongoDbUrl, {
     useNewUrlParser: true
 }).then(db => {
     console.log('MongoDB Connected');
 }).catch(err => {
     console.log(err);
 });
+
+// Database Localhost
+// const mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost:27017/cms', {
+//     useNewUrlParser: true
+// }).then(db => {
+//     console.log('MongoDB Connected');
+// }).catch(err => {
+//     console.log(err);
+// });
 
 // Method Override
 
