@@ -26,6 +26,14 @@
     <!-- Page Content -->
     <div class="container">
 
+      {{#if errors}}
+        {{#each errors}}
+          <div class="alert alert-danger" role="alert">
+            <strong>{{message}}</strong>
+          </div>
+        {{/each}}
+      {{/if}}
+
         {{{body}}}
 
     </div>
