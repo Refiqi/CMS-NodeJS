@@ -24,8 +24,38 @@ router.post('/create', (req, res)=>{
         console.log(savedCat);
     });
 
-    res.render('admin');
+    res.redirect('/admin/categories');
 });
+
+router.get('/edit/:id', (req, res)=>{
+
+    Category.findOne({_id: req.params.id}).then(categories=>{
+        res.render('admin/categories/edit', {categories: categories});
+    }).catch(err=>{
+        if (err) throw err;
+    });
+});
+
+router.patch('/edit/:id', (req, res)=>{
+
+    Category.findOne({_id: req.params.id}).then(categories=>{
+
+        categories.name = req.body.name;
+
+        categories.save().then(savedCat=>{
+            res.redirect('/admin/categories');
+        });
+
+    });
+
+});
+
+router.delete('/:id', (req, res)=>{
+    Category.findOneAndDelete({_id: req.params.id}).then(categories=>{
+        res.redirect('/admin/categories');
+    });
+});
+
 
 
 

@@ -1,0 +1,15 @@
+<div class="row">
+        <div class="col-sm-4">
+        <h2>Edit Category</h2>
+
+        <form action="/admin/categories/edit/{{categories.id}}?_method=PATCH" method="post">
+
+            <div class="form-group">
+                <input type="text" name="name" id="name" class="form-control" placeholder="Enter new Category">
+            </div>
+
+            <button type="submit" class="btn btn-info">Edit Categories</button>
+
+        </form>
+    </div>
+</div>

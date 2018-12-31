@@ -76,6 +76,7 @@ app.use('/post', express.static('public'));
 app.use('/admin', express.static('public'));
 app.use('/admin/posts', express.static('public'));
 app.use('/admin/categories', express.static('public'));
+app.use('/admin/categories/edit', express.static('public'));
 app.use('/admin/posts/edit', express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 

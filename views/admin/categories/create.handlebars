@@ -35,6 +35,12 @@
                     <td>{{id}}</td>
                     <td>{{name}}</td>
                     <td>{{generateTime date 'MMMM Do YYYY'}}</td>
+                    <td><a class="btn btn-primary" href="categories/edit/{{id}}">Edit</a></td>
+                    <td>
+                        <form action="/admin/categories/{{id}}?_method=DELETE" method="POST">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
                 {{/each}}
 
