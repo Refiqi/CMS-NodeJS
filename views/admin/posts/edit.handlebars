@@ -9,6 +9,21 @@
 
     </div>
 
+    <div class="form-group">
+
+        <label for="category">Category</label>
+
+        <select class="form-control" name="category" id="category">
+            
+            {{#select post.category}}   
+                {{#each categories}}
+                <option value="{{id}}">{{name}}</option>
+                {{/each}}
+            {{/select}}
+
+        </select>
+
+    </div>
 
     <div class="form-group">
 
