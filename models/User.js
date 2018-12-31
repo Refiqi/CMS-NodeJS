@@ -18,7 +18,6 @@ const UserSchema = new Schema ({
     },
     email: {
         type: String,
-        unique: true,
         required: true,
         trim: true,
         validate: [validateEmail, 'Please Fill a Valid Email address'],

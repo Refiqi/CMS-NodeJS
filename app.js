@@ -56,6 +56,7 @@ app.use(flash());
 // Creating Local Variables with middleware
 app.use((req, res, next)=>{
     res.locals.success_message = req.flash('success_message');
+    res.locals.errors_message = req.flash('errors_message');
     next();
 });
 
@@ -95,7 +96,7 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
     console.log(`Listening at ${port}`);
