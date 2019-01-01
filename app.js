@@ -6,6 +6,7 @@ const methodOverride = require('method-override');
 const upload = require('express-fileupload');
 const flash = require('connect-flash');
 const session = require('express-session');
+const passport = require('passport');
 
 // Body Parser
 const bodyParser = require('body-parser');
@@ -53,10 +54,20 @@ app.use(session({
 
 app.use(flash());
 
+// Passport
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Creating Local Variables with middleware
 app.use((req, res, next)=>{
+
+    res.locals.user = req.user || null;
     res.locals.success_message = req.flash('success_message');
     res.locals.errors_message = req.flash('errors_message');
+    res.locals.error = req.flash('error');
+
+
     next();
 });
 
