@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
 
     Post.find({})
     .populate('category')
+    .populate('user')
     .then(posts => {
         res.render('admin/posts', {
             posts: posts
@@ -21,6 +22,21 @@ router.get('/', (req, res) => {
     }).catch(err => {
         res.send(err);
     });
+});
+
+router.get('/user', (req, res)=>{
+
+    Post.find({user: req.user.id})
+    
+    .populate('category')
+    .then(posts=>{
+        console.log(posts);
+        res.render('admin/posts/myPost', {posts: posts});
+
+    }).catch(err=>{
+        if (err) throw err;
+    });
+
 });
 
 router.get('/create', (req, res) => {
@@ -55,6 +71,8 @@ router.post('/create', (req, res) => {
     }
 
     const newPost = new Post({
+
+        user: req.user.id,
         title: req.body.title,
         status: req.body.status,
         allowComments: allowComments,
@@ -100,6 +118,7 @@ router.put('/edit/:id', (req, res) => {
             allowComments = false;
         }
 
+        post.user = req.user.id;
         post.title = req.body.title;
         post.status = req.body.status;
         post.allowComments = allowComments;

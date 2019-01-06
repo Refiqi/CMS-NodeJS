@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 const PostSchema = new Schema ({
     
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
+    },
     category: {
         type: Schema.Types.ObjectId,
         ref: 'categories'
