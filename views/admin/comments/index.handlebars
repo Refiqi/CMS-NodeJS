@@ -1,0 +1,27 @@
+<h>All Comments</h>
+
+<table class="table table-bordered table-inverse table-responsive">
+    <thead class="thead-inverse">
+        <tr>
+            <th>Id</th>
+            <th>User</th>
+            <th>Comments</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+            {{#each comments}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{body}}</td>    
+                    <td>{{generateTime date 'MMMM Do YYYY'}}</td>
+                    <td>
+                        <form action="/admin/comments/{{id}}?_method=DELETE" method="POST">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {{/each}}    
+        </tbody>
+</table>

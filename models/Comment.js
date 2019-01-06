@@ -11,6 +11,10 @@ const CommentSchema = new Schema ({
         type: String,
         required: true,
         minlength: 6
+    },
+    date: {
+        type: Date,
+        default: Date.now()
     }
 
 });

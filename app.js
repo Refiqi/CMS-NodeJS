@@ -76,12 +76,14 @@ const main = require('./routes/home/main');
 const admin = require('./routes/admin/admin');
 const posts = require('./routes/admin/posts');
 const categories = require('./routes/admin/categories');
+const comments = require('./routes/admin/comments');
 
 // Use Routes
 app.use('/', main);
 app.use('/admin', admin);
 app.use('/admin/posts', posts);
 app.use('/admin/categories', categories);
+app.use('/admin/comments', comments);
 
 // Use Style and JS
 app.use('/post', express.static('public'));
@@ -107,7 +109,7 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
     console.log(`Listening at ${port}`);
