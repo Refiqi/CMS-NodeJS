@@ -42,7 +42,7 @@ router.post('/', (req, res)=>{
             newComment.save().then(savedComment=>{
 
                 req.flash('success_message', 'Comment Posted Successfully');
-                res.redirect(`/post/${post.id}`);
+                res.redirect(`/post/${post.slug}`);
 
             });
         });

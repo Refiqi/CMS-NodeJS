@@ -90,9 +90,9 @@ router.post('/create', (req, res) => {
 
 });
 
-router.get('/edit/:id', (req, res) => {
+router.get('/edit/slug', (req, res) => {
 
-    Post.findOne({_id: req.params.id})
+    Post.findOne({slug: req.params.slug})
     
     .then(post => {
         Category.find({}).then(categories=>{
