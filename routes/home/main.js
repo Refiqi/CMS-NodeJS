@@ -13,9 +13,9 @@ router.all('/*', (req, res, next) => {
     next();
 });
 
-router.get('/post/:id', (req, res) => {
+router.get('/post/:slug', (req, res) => {
 
-    Post.findOne({_id: req.params.id})
+    Post.findOne({slug: req.params.slug})
     
     .populate({path: 'comments', match: {approveComment: true}, populate: {path: 'user', model: 'users'}})
     .populate('user')

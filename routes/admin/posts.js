@@ -141,7 +141,7 @@ router.delete('/:id', (req, res) => {
     .populate('comments')
     .then(post => { 
 
-        if (!post.comments.length < 1){
+        if (post.comments.length < 1){
             post.comments.forEach(comment=>{
                 comment.remove();
             });
