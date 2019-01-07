@@ -33,14 +33,30 @@ router.get('/post/:slug', (req, res) => {
 
 router.get('/', (req, res) => {
 
-    Post.find({}).then(posts => {
+    const perPage = 10;
+    const page = req.query.page || 1;
 
-        Category.find({}).then(categories => {
+    Post.find({})
+    
+    .skip((perPage * page) - perPage)
+    .limit(perPage)
+    .then(posts => {
 
-            res.render('home/index', {
-                posts: posts,
-                categories: categories
+        Post.count().then(postCount=>{
+
+            Category.find({}).then(categories => {
+
+                res.render('home/index', {
+                    posts: posts,
+                    categories: categories,
+                    current: parseInt(page),
+                    pages: Math.ceil(postCount / perPage)
+    
+                });
             });
+
+        }).catch(err=>{
+            if (err) throw err;
         });
     }).catch(err => {
         if (err) throw err;

@@ -97,14 +97,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 // SET Engine
 
 const {
-    select, generateTime
+    select, generateTime, paginate
 } = require('./helpers/handlebars-helpers');
 
 app.engine('handlebars', exphbs({
     defaultLayout: 'home',
     helpers: {
         select: select,
-        generateTime: generateTime
+        generateTime: generateTime,
+        paginate: paginate
     }
 }));
 app.set('view engine', 'handlebars');
