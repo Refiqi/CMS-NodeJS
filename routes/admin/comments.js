@@ -2,11 +2,13 @@ const express = require('express');
 const router = express.Router();
 const Comment = require('../../models/Comment');
 const Post = require('../../models/Post');
+const {userAuthenticated} = require('../../helpers/authentication');
 
-router.all('/*', (req, res, next)=>{
+router.all('/*', userAuthenticated, (req, res, next)=>{
 
-    req.app.locals.layouts = 'home';
+    req.app.locals.layout = 'admin';
     next();
+
 });
 
 router.get('/', (req, res)=>{
@@ -62,6 +64,18 @@ router.delete('/:id', (req, res)=>{
 
     }).catch(err=>{
         if (err) throw err;
+    });
+
+});
+
+router.post('/approve-comment', (req, res)=>{
+
+    Comment.findByIdAndUpdate(req.body.id, {$set: {approveComment: req.body.approveComment}}, (err, result)=>{
+
+        if (err) throw err;
+
+        res.send(result);
+
     });
 
 });

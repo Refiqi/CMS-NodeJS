@@ -4,8 +4,9 @@ const Post = require('../../models/Post');
 const Category = require('../../models/Category');
 const { isEmpty, uploadDir } = require('../../helpers/uploads-helpers');
 const fs = require('fs');
+const {userAuthenticated} = require('../../helpers/authentication');
 
-router.all('/*', (req, res, next) => {
+router.all('/*',  userAuthenticated, (req, res, next) => {
     req.app.locals.layout = 'admin';
     next();
 });

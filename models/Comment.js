@@ -12,6 +12,10 @@ const CommentSchema = new Schema ({
         required: true,
         minlength: 6
     },
+    approveComment: {
+        type: Boolean,
+        default: true
+    },
     date: {
         type: Date,
         default: Date.now()
