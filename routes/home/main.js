@@ -38,6 +38,7 @@ router.get('/', (req, res) => {
 
     Post.find({})
     
+    .populate('user')
     .skip((perPage * page) - perPage)
     .limit(perPage)
     .then(posts => {
