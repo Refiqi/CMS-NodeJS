@@ -10,6 +10,8 @@
             <th>Allow Comments</th>
             <th>Body</th>
             <th>Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -25,9 +27,9 @@
                 <td>{{allowComments}}</td>
                 <td>{{body}}</td>
                 <td>{{generateTime date 'MMMM Do YYYY'}}</td>
-                <td><a href="/admin/posts/edit/{{id}}" class="btn btn-info">Edit</a></td>
+                <td><a href="/admin/posts/edit/{{slug}}" class="btn btn-info">Edit</a></td>
                 <td>
-                    <form action="/admin/posts/{{id}}?_method=DELETE" method="post">
+                    <form action="/admin/posts/{{slug}}?_method=DELETE" method="post">
                         <button type="submit" class="btn btn-danger">DELETE</button>
                     </form>
                 </td>
